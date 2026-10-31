@@ -8,9 +8,9 @@
 # ──────────────────────────────────────────────────────────────
 
 # ── Web framework ──────────────────────────────────────────────
-fastapi==0.138.0           # REST API server
-uvicorn==0.49.0            # ASGI server to run FastAPI
-python-multipart==0.0.32   # Required for file uploads (UploadFile)
+fastapi>=0.115.0           # REST API server
+uvicorn>=0.30.0            # ASGI server to run FastAPI
+python-multipart>=0.0.9    # Required for file uploads (UploadFile)
 
 # ── Computer vision ────────────────────────────────────────────
 opencv-python-headless==4.13.0.92   # Image processing + skeleton overlay
