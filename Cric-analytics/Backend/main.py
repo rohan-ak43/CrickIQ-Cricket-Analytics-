@@ -10,7 +10,17 @@ from typing import Optional
 
 import cv2
 import numpy as np
+
+# Starlette 1.0+ compatibility fix for FastAPI Router
+import starlette.routing
+_orig_router_init = starlette.routing.Router.__init__
+def _compat_router_init(self, *args, on_startup=None, on_shutdown=None, **kwargs):
+    return _orig_router_init(self, *args, **kwargs)
+starlette.routing.Router.__init__ = _compat_router_init
+
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+# Starlette 1.0+ compatibility fix for build_middleware_stack
+FastAPI.max_body_size = None
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from PIL import Image 
@@ -26,6 +36,7 @@ from mediapipe.tasks.python import vision as mp_vision
 
 # app
 app = FastAPI(title="CrickIQ API",version="2.0.0")
+app.max_body_size = None
 
 # cors
 app.add_middleware(CORSMiddleware, 
